@@ -11,10 +11,10 @@ export class QuizController {
         return res.status(404).json({ error: 'Quiz not found' });
       }
 
-      res.json(quiz);
+      return res.json(quiz);
     } catch (error) {
       console.error('Error fetching quiz:', error);
-      res.status(500).json({ error: 'Failed to fetch quiz' });
+      return res.status(500).json({ error: 'Failed to fetch quiz' });
     }
   }
 
@@ -33,10 +33,10 @@ export class QuizController {
       const id = parseInt(req.params.id);
       const quiz = await quizQueries.update(id, req.body);
       if (!quiz) return res.status(404).json({ error: 'Quiz not found' });
-      res.json(quiz);
+      return res.json(quiz);
     } catch (error) {
       console.error('Error updating quiz:', error);
-      res.status(500).json({ error: 'Failed to update quiz' });
+      return res.status(500).json({ error: 'Failed to update quiz' });
     }
   }
 
@@ -86,10 +86,10 @@ export class QuizController {
       const id = parseInt(req.params.questionId);
       const question = await questionQueries.update(id, req.body);
       if (!question) return res.status(404).json({ error: 'Question not found' });
-      res.json(question);
+      return res.json(question);
     } catch (error) {
       console.error('Error updating question:', error);
-      res.status(500).json({ error: 'Failed to update question' });
+      return res.status(500).json({ error: 'Failed to update question' });
     }
   }
 
@@ -120,10 +120,10 @@ export class QuizController {
       const id = parseInt(req.params.answerId);
       const answer = await answerQueries.update(id, req.body);
       if (!answer) return res.status(404).json({ error: 'Answer not found' });
-      res.json(answer);
+      return res.json(answer);
     } catch (error) {
       console.error('Error updating answer:', error);
-      res.status(500).json({ error: 'Failed to update answer' });
+      return res.status(500).json({ error: 'Failed to update answer' });
     }
   }
 
@@ -187,10 +187,10 @@ export class QuizController {
         completed_at: new Date(),
       });
 
-      res.status(201).json(attempt);
+      return res.status(201).json(attempt);
     } catch (error) {
       console.error('Error submitting quiz attempt:', error);
-      res.status(500).json({ error: 'Failed to submit quiz attempt' });
+      return res.status(500).json({ error: 'Failed to submit quiz attempt' });
     }
   }
 }

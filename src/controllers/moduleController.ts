@@ -3,7 +3,7 @@ import { moduleQueries, lessonQueries, quizQueries } from '../db/queries.js';
 
 export class ModuleController {
   
-  static async getAll(req: Request, res: Response) {
+  static async getAll(_req: Request, res: Response) {
     try {
       const modules = await moduleQueries.getAll();
       res.json(modules);
@@ -23,10 +23,10 @@ export class ModuleController {
         return res.status(404).json({ error: 'Module not found' });
       }
 
-      res.json(module);
+      return res.json(module);
     } catch (error) {
       console.error('Error fetching module:', error);
-      res.status(500).json({ error: 'Failed to fetch module' });
+      return res.status(500).json({ error: 'Failed to fetch module' });
     }
   }
 
@@ -45,10 +45,10 @@ export class ModuleController {
         return res.status(404).json({ error: 'Module not found' });
       }
 
-      res.json({ module, lessons, quiz });
+      return res.json({ module, lessons, quiz });
     } catch (error) {
       console.error('Error fetching module details:', error);
-      res.status(500).json({ error: 'Failed to fetch module details' });
+      return res.status(500).json({ error: 'Failed to fetch module details' });
     }
   }
 
@@ -73,10 +73,10 @@ export class ModuleController {
         return res.status(404).json({ error: 'Module not found' });
       }
 
-      res.json(module);
+      return res.json(module);
     } catch (error) {
       console.error('Error updating module:', error);
-      res.status(500).json({ error: 'Failed to update module' });
+      return res.status(500).json({ error: 'Failed to update module' });
     }
   }
 

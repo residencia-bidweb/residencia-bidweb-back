@@ -7,10 +7,10 @@ export class LessonController {
       const moduleId = parseInt(req.query.moduleId as string);
       if (isNaN(moduleId)) return res.status(400).json({ error: 'moduleId is required' });
       const lessons = await lessonQueries.getByModuleId(moduleId);
-      res.json(lessons);
+      return res.json(lessons);
     } catch (error) {
       console.error('Error listing lessons:', error);
-      res.status(500).json({ error: 'Failed to list lessons' });
+      return res.status(500).json({ error: 'Failed to list lessons' });
     }
   }
 
@@ -29,10 +29,10 @@ export class LessonController {
       const id = parseInt(req.params.id);
       const lesson = await lessonQueries.update(id, req.body);
       if (!lesson) return res.status(404).json({ error: 'Lesson not found' });
-      res.json(lesson);
+      return res.json(lesson);
     } catch (error) {
       console.error('Error updating lesson:', error);
-      res.status(500).json({ error: 'Failed to update lesson' });
+     return res.status(500).json({ error: 'Failed to update lesson' });
     }
   }
 

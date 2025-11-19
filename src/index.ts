@@ -9,7 +9,6 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const CORS_ORIGIN = process.env.CORS_ORIGIN || 'http://localhost:5173';
 
 app.use(cors({
   origin: "*",
@@ -18,7 +17,7 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/health', (req, res) => {
+app.get('/health', (_req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
@@ -26,7 +25,7 @@ app.use('/api/modules', moduleRoutes);
 app.use('/api/quizzes', quizRoutes);
 app.use('/api/lessons', lessonRoutes);
 
-app.use((req, res) => {
+app.use((_req, res) => {
   res.status(404).json({ error: 'Route not found' });
 });
 
