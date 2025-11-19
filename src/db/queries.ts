@@ -69,6 +69,16 @@ export const quizQueries = {
     const result = await db.insert(quizzes).values(data).returning();
     return result[0];
   },
+
+  update: async (id: number, data: Partial<typeof quizzes.$inferInsert>) => {
+    const result = await db.update(quizzes).set(data).where(eq(quizzes.id, id)).returning();
+    return result[0] || null;
+  },
+
+  delete: async (id: number) => {
+    await db.delete(quizzes).where(eq(quizzes.id, id));
+    return true;
+  },
 };
 
 export const questionQueries = {
@@ -80,6 +90,16 @@ export const questionQueries = {
     const result = await db.insert(questions).values(data).returning();
     return result[0];
   },
+
+  update: async (id: number, data: Partial<typeof questions.$inferInsert>) => {
+    const result = await db.update(questions).set(data).where(eq(questions.id, id)).returning();
+    return result[0] || null;
+  },
+
+  delete: async (id: number) => {
+    await db.delete(questions).where(eq(questions.id, id));
+    return true;
+  },
 };
 
 export const answerQueries = {
@@ -90,6 +110,16 @@ export const answerQueries = {
   create: async (data: typeof answers.$inferInsert) => {
     const result = await db.insert(answers).values(data).returning();
     return result[0];
+  },
+
+  update: async (id: number, data: Partial<typeof answers.$inferInsert>) => {
+    const result = await db.update(answers).set(data).where(eq(answers.id, id)).returning();
+    return result[0] || null;
+  },
+
+  delete: async (id: number) => {
+    await db.delete(answers).where(eq(answers.id, id));
+    return true;
   },
 };
 
