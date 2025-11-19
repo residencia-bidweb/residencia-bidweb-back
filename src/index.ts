@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import moduleRoutes from './routes/moduleRoutes.js';
 import quizRoutes from './routes/quizRoutes.js';
+import lessonRoutes from './routes/lessonRoutes.js';
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ app.get('/health', (req, res) => {
 
 app.use('/api/modules', moduleRoutes);
 app.use('/api/quizzes', quizRoutes);
+app.use('/api/lessons', lessonRoutes);
 
 app.use((req, res) => {
   res.status(404).json({ error: 'Route not found' });
